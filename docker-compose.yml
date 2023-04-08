@@ -53,3 +53,15 @@ services:
             - .:/var/www/html/project:delegated
         networks:
             - laravel
+    cron:
+        container_name: ${APP_NAME}_cron
+        build:
+            context: ./dockerfiles
+            dockerfile: cron.dockerfile
+            args:
+                - UID=${UID:-1000}
+                - GID=${GID:-1000}
+        volumes:
+            - .:/var/www/html/project:delegated
+        networks:
+            - laravel

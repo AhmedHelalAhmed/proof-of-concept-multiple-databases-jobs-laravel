@@ -12,6 +12,15 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        dump("run");
+        $databases = [
+            'service1',
+            'service2',
+            'service3',
+        ];
+        foreach ($databases as $database) {
+            $schedule->command("run:worker {$database}")->everyMinute();
+        }
         // $schedule->command('inspire')->hourly();
     }
 
@@ -20,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
