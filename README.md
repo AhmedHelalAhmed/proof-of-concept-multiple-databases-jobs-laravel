@@ -1,3 +1,10 @@
+# Here I want to proof we can run worker of laravel on multiple databases and hence we can have jobs table on each database separately
+
+
+### If you have docker and docker compose installed
+- ```cp .env.example .env``` and update with your data like database and redis
+- ``` docker-compose up ``` 
+
 ## Run commands against multiple databases
 
 - ``` php artisan migrate --database=service1 ```
