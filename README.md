@@ -36,4 +36,4 @@ The idea to run queue:work with default connection set to different database
   ``` php artisan migrate --database=service1;php artisan migrate --database=service2;php artisan migrate --database=service3 ```
 - Create some jobs
   ``` php artisan dispatch:job 1;php artisan dispatch:job 2;php artisan dispatch:job 3 ```
-- Check posts table in each database
+- Check posts table in each database after one minute
