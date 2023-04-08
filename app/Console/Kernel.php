@@ -12,7 +12,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        dump("run");
         $databases = [
             'service1',
             'service2',
