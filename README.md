@@ -62,9 +62,14 @@ The idea to run queue:work with default connection set to different database
 Like this we simulate that command run in new process
 
 - Set up supervisor to run multiple workers with commands like that to consume the jobs:
- 
-``` php artisan run:worker service1 ```
-  ``` php artisan run:worker service2 ```
-  ``` php artisan run:worker service3 ```
 
-Like this we consume the jobs in separate processes 
+``` php artisan run:worker service1 ```
+``` php artisan run:worker service2 ```
+``` php artisan run:worker service3 ```
+
+Like this we consume the jobs in separate processes
+
+## Notes
+
+- To switch only the database on runtime without change the connection:
+  ```config(['database.connections.mysql.database' => $this->argument('connection')]);```
