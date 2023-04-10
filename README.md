@@ -56,8 +56,15 @@ The idea to run queue:work with default connection set to different database
 ## Final solution for this challenge
 
 - To produce the jobs use crontab like that:
+
   ``` * * * * * cd /var/www/html/project && php artisan dispatch:job 1 && php artisan dispatch:job 2 && php artisan dispatch:job 3 >> /dev/stdout 2>&1 ```
+
+Like this we simulate that command run in new process
+
 - Set up supervisor to run multiple workers with commands like that to consume the jobs:
-  ``` php artisan run:worker service1 ```
+ 
+``` php artisan run:worker service1 ```
   ``` php artisan run:worker service2 ```
   ``` php artisan run:worker service3 ```
+
+Like this we consume the jobs in separate processes 
