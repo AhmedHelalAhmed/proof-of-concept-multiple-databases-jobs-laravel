@@ -14,12 +14,12 @@
 
 ## Add jobs to multiple databases
 
-- ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 1 ``` 
-This will add job to service1 database
-- ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 2 ``` 
-This will add job to service2 database
-- ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 3 ``` 
-This will add job to service3 database
+- ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 1 ```
+  This will add job to service1 database
+- ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 2 ```
+  This will add job to service2 database
+- ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 3 ```
+  This will add job to service3 database
 
 ## The goal
 
@@ -52,3 +52,12 @@ The idea to run queue:work with default connection set to different database
     - ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 2```
     - ``` docker exec -it proof-of-concept-multiple-databases-jobs-laravel_php php artisan dispatch:job 3 ```
 - Check posts table in each database after one minute
+
+## Final solution for this challenge
+
+- To produce the jobs use crontab like that:
+  ``` * * * * * cd /var/www/html/project && php artisan dispatch:job 1 && php artisan dispatch:job 2 && php artisan dispatch:job 3 >> /dev/stdout 2>&1 ```
+- Set up supervisor to run multiple workers with commands like that to consume the jobs:
+  ``` php artisan run:worker service1 ```
+  ``` php artisan run:worker service2 ```
+  ``` php artisan run:worker service3 ```
